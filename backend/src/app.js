@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // importare routes
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "ReviewSense API funzionante" });

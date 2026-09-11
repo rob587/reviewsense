@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import authRoutes from "./routes/authRoutes.js";
+import analisiRoutes from "./routes/analisiRoutes.js";
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // importare routes
 app.use("/api/auth", authRoutes);
+app.use("/api/analisi", analisiRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "ReviewSense API funzionante" });

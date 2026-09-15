@@ -30,3 +30,44 @@ export const loginUser = async (email, password) => {
     if (!res.ok) throw new Error(data.error || "Errore login");
     return data;
 };
+
+
+//analisi
+export const analyzeRecensioni = async (nome_prodotto, categoria, recensioni) => {
+    const res = await fetch(`${BASE_URL}/analisi/analyze`, {
+        method: "POST",
+        headers: getHeaders(),
+        body: JSON.stringify({ nome_prodotto, categoria, recensioni }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Errore analisi");
+    return data;
+};
+
+export const getHistory = async () => {
+    const res = await fetch(`${BASE_URL}/analisi/history`, {
+        headers: getHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Errore fetch storico");
+    return data;
+};
+
+export const getAnalisi = async (id) => {
+    const res = await fetch(`${BASE_URL}/analisi/${id}`, {
+        headers: getHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Errore fetch analisi");
+    return data;
+};
+
+export const deleteAnalisi = async (id) => {
+    const res = await fetch(`${BASE_URL}/analisi/${id}`, {
+        method: "DELETE",
+        headers: getHeaders(),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Errore eliminazione analisi");
+    return data;
+};

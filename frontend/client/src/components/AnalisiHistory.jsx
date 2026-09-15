@@ -28,6 +28,39 @@ const AnalisiHistory = ({ onLoadAnalisi }) => {
     loadHistory();
   }, []);
 
+  const handleDelete = async (e, id) => {
+    e.stopPropagation();
+    try {
+      await deleteAnalisi(id);
+      setHistory(history.filter((a) => a.id !== id));
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("it-IT", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 7) return "#34d399";
+    if (score >= 5) return "#fbbf24";
+    return "#ef4444";
+  };
+
+  if (loading)
+    return (
+      <div className="flex items-center justify-center py-20 text-gray-500">
+        Caricamento storico...
+      </div>
+    );
+
   return <div>AnalisiHistory</div>;
 };
 

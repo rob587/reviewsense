@@ -92,14 +92,29 @@ const AnalisiReport = ({ analisi, onNuovaAnalisi }) => {
 
   return (
     <div className="space-y-4">
-      {/* Header */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-        <div className="flex items-start justify-between mb-4">
+      <div
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(56,189,248,0.15)",
+          backdropFilter: "blur(20px)",
+        }}
+        className="rounded-2xl p-6"
+      >
+        <div className="flex items-start justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-100">{nome_prodotto}</h2>
-            <div className="flex items-center gap-2 mt-1">
+            <h2 className="text-2xl font-bold text-white mb-1">
+              {nome_prodotto}
+            </h2>
+            <div className="flex items-center gap-2">
               {categoria && (
-                <span className="bg-gray-800 text-gray-400 text-xs px-2 py-0.5 rounded-full">
+                <span
+                  style={{
+                    background: "rgba(14,165,233,0.1)",
+                    border: "1px solid rgba(14,165,233,0.2)",
+                    color: "#38bdf8",
+                  }}
+                  className="text-xs px-2 py-0.5 rounded-full"
+                >
                   {categoria}
                 </span>
               )}
@@ -110,68 +125,115 @@ const AnalisiReport = ({ analisi, onNuovaAnalisi }) => {
           </div>
           <button
             onClick={onNuovaAnalisi}
-            className="bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-all"
+            style={{ background: "linear-gradient(135deg, #0ea5e9, #06b6d4)" }}
+            className="text-white text-sm font-medium px-4 py-2 rounded-xl transition-all hover:opacity-90"
           >
             + Nuova Analisi
           </button>
         </div>
 
-        {/* Score + Sentiment */}
         <div className="flex items-center gap-8">
           <ScoreGauge score={r.sentiment_score} />
           <div className="flex-1">
             <div
-              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border mb-3 ${sentimentConfig.bg} ${sentimentConfig.border}`}
+              style={{
+                background: `${sentimentConfig.color}15`,
+                border: `1px solid ${sentimentConfig.color}40`,
+              }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-3"
             >
               <span
                 style={{ color: sentimentConfig.color }}
                 className="font-semibold text-sm"
               >
-                {sentimentConfig.label}
+                {sentimentConfig.emoji} {sentimentConfig.label}
               </span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-3">
               {r.sintesi}
             </p>
-            <div className="flex items-center gap-2 text-xs text-gray-500">
-              <span>
-                📊 ~{r.numero_recensioni_stimate} recensioni analizzate
-              </span>
-            </div>
+            <p className="text-gray-600 text-xs">
+              ~{r.numero_recensioni_stimate} recensioni analizzate
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Pro e Contro */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-          <h3 className="text-emerald-400 font-semibold mb-4 flex items-center gap-2">
-            ✅ Pro
+        <div
+          style={{
+            background: "rgba(52,211,153,0.05)",
+            border: "1px solid rgba(52,211,153,0.2)",
+            backdropFilter: "blur(20px)",
+          }}
+          className="rounded-2xl p-6"
+        >
+          <h3 className="font-semibold mb-4 flex items-center gap-2 text-emerald-400">
+            Pro
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {r.pro?.map((pro, i) => (
               <li
                 key={i}
                 className="flex items-start gap-2 text-sm text-gray-300"
               >
-                <span className="text-emerald-400 mt-0.5 shrink-0">+</span>
+                <span
+                  style={{
+                    color: "#34d399",
+                    background: "rgba(52,211,153,0.1)",
+                    borderRadius: "50%",
+                    width: "20px",
+                    height: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    fontSize: "0.7rem",
+                    fontWeight: "700",
+                  }}
+                >
+                  +
+                </span>
                 {pro}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-          <h3 className="text-red-400 font-semibold mb-4 flex items-center gap-2">
-            ❌ Contro
+        <div
+          style={{
+            background: "rgba(239,68,68,0.05)",
+            border: "1px solid rgba(239,68,68,0.2)",
+            backdropFilter: "blur(20px)",
+          }}
+          className="rounded-2xl p-6"
+        >
+          <h3 className="font-semibold mb-4 flex items-center gap-2 text-red-400">
+            Contro
           </h3>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {r.contro?.map((contro, i) => (
               <li
                 key={i}
                 className="flex items-start gap-2 text-sm text-gray-300"
               >
-                <span className="text-red-400 mt-0.5 shrink-0">−</span>
+                <span
+                  style={{
+                    color: "#ef4444",
+                    background: "rgba(239,68,68,0.1)",
+                    borderRadius: "50%",
+                    width: "20px",
+                    height: "20px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                    fontSize: "0.7rem",
+                    fontWeight: "700",
+                  }}
+                >
+                  −
+                </span>
                 {contro}
               </li>
             ))}
@@ -179,14 +241,25 @@ const AnalisiReport = ({ analisi, onNuovaAnalisi }) => {
         </div>
       </div>
 
-      {/* Temi ricorrenti */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-        <h3 className="text-gray-100 font-semibold mb-4">🏷️ Temi Ricorrenti</h3>
+      <div
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(56,189,248,0.15)",
+          backdropFilter: "blur(20px)",
+        }}
+        className="rounded-2xl p-6"
+      >
+        <h3 className="text-white font-semibold mb-4">🏷️ Temi Ricorrenti</h3>
         <div className="flex flex-wrap gap-2">
           {r.temi_ricorrenti?.map((tema, i) => (
             <span
               key={i}
-              className="bg-violet-500/10 border border-violet-500/30 text-violet-300 text-sm px-3 py-1.5 rounded-full"
+              style={{
+                background: "rgba(14,165,233,0.1)",
+                border: "1px solid rgba(14,165,233,0.25)",
+                color: "#38bdf8",
+              }}
+              className="text-sm px-3 py-1.5 rounded-full"
             >
               {tema}
             </span>
@@ -194,18 +267,31 @@ const AnalisiReport = ({ analisi, onNuovaAnalisi }) => {
         </div>
       </div>
 
-      {/* Raccomandazione + Target */}
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-          <h3 className="text-gray-100 font-semibold mb-3">
-            💡 Raccomandazione
+        <div
+          style={{
+            background: "rgba(251,191,36,0.05)",
+            border: "1px solid rgba(251,191,36,0.2)",
+            backdropFilter: "blur(20px)",
+          }}
+          className="rounded-2xl p-6"
+        >
+          <h3 className="text-yellow-400 font-semibold mb-3">
+            Raccomandazione
           </h3>
           <p className="text-gray-300 text-sm leading-relaxed">
             {r.raccomandazione}
           </p>
         </div>
-        <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-          <h3 className="text-gray-100 font-semibold mb-3">🎯 Target Ideale</h3>
+        <div
+          style={{
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(56,189,248,0.15)",
+            backdropFilter: "blur(20px)",
+          }}
+          className="rounded-2xl p-6"
+        >
+          <h3 className="text-cyan-400 font-semibold mb-3">Target Ideale</h3>
           <p className="text-gray-300 text-sm leading-relaxed">
             {r.target_ideale}
           </p>

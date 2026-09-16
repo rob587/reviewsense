@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  analyzeRecensioni,
+  searchAndAnalyze,
   getHistory,
   getAnalisi,
   deleteAnalisi,
@@ -9,7 +9,7 @@ import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/analyze", auth, analyzeRecensioni);
+router.post("/analyze", auth, searchAndAnalyze);
 router.get("/history", auth, getHistory);
 router.get("/:id", auth, getAnalisi);
 router.delete("/:id", auth, deleteAnalisi);

@@ -28,6 +28,27 @@ const AppContent = () => {
   }
 };
 
+const handleAnalisiComplete = (analisi) => {
+  setCurrentAnalisi(analisi);
+  setActiveTab("report");
+};
+
+const handleLoadAnalisi = (analisi) => {
+  setCurrentAnalisi(analisi);
+  setActiveTab("report");
+};
+
+const handleNuovaAnalisi = () => {
+  setCurrentAnalisi(null);
+  setActiveTab("analisi");
+};
+
+const TABS = [
+  { id: "analisi", label: "🔍 Analizza" },
+  { id: "report", label: "📊 Report", disabled: !currentAnalisi },
+  { id: "history", label: "📚 Storico" },
+];
+
 const App = () => {
   return (
     <AuthProvider>
